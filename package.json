@@ -1,0 +1,23 @@
+{
+  "name": "webcam-facedetection",
+  "version": "1.0.0",
+  "description": "Implementation face detection with webcam camera",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "facedetection",
+    "webcam",
+    "face"
+  ],
+  "author": "werlic",
+  "license": "ISC",
+  "dependencies": {
+    "@techstark/opencv-js": "^4.7.0-release.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "socket.io": "^4.6.1"
+  }
+}

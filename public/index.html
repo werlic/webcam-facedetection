@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,
+                  initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="" alt="" id="image">
+  <video src="" autoplay id="video-webcam"></video>
+  <canvas id="canvas" width="475" height="475" alt="Canvas image"></canvas>
+</body>
+<script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  var connection = false;
+
+  const socket = io('http://localhost:3000')
+  // seleksi elemen video
+  var video = document.querySelector("#video-webcam");
+
+  // minta izin user
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+  // jika user memberikan izin
+  if (navigator.getUserMedia) {
+      // jalankan fungsi handleVideo, dan videoError jika izin ditolak
+      navigator.getUserMedia({ video: true, auido: false }, handleVideo, videoError);
+  }
+
+  // fungsi ini akan dieksekusi jika izin telah diberikan
+  function handleVideo(stream) {
+      video.srcObject = stream;
+  }
+
+  // fungsi ini akan dieksekusi kalau user menolak izin
+  function videoError(e) {
+      // do something
+      alert("Izinkan menggunakan webcam untuk demo!");
+  }
+
+  function streamImage(stream) {
+    
+  }
+
+  socket.on('connect', () => {
+    connection = true;
+    console.log('Connected to socket');
+
+    socket.on('disconnect', () => {
+      connection = false;
+      console.log('Disconnect from socket');
+    });
+
+    // socket.on('image', (image) => {
+    // const imageElm = document.getElementById('image');
+    //  imageElm.src = `data:image/jpeg;base64,${image}`;
+    // });
+  });
+
+</script>
+
+</html>
